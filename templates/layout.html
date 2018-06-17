@@ -1,0 +1,66 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="utf-8">
+    <title>Swan - Sensor Cloud</title>
+ <!--   <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
+-->
+<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css" integrity="sha384-BVYiiSIFeK1dGmJRAkycuHAHRg32OmUcww7on3RYdg4Va+PmSTsz/K68vbdEjh4u" crossorigin="anonymous">
+
+{% block style %}{% endblock %}
+<style>
+
+html {
+    height: 100%;
+    
+}
+.navbar-inverse {
+    background-color: #4cae4c;
+    border-color: #449d44;
+}
+.navbar .navbar-inverse .navbar-nav > li > a:focus, .navbar-inverse .navbar-nav > li > a:hover {
+    color: #4cae4c;
+    background-color: #fff;
+    transition: 0.8s;
+    box-shadow: 0 8px 16px 0 rgba(0,0,0,0.2);
+    
+}
+
+.navbar-inverse .navbar-nav > li > a {
+    color: #fff;
+    background-color: #4cae4c;
+    border-color: #449d44;
+    
+}	
+.jumbotron > a:focus, .jumbotron > a:hover, .pull-right > button:hover, .pull-right > button:focus, button:focus, button:hover  {
+    transition: 0.8s;
+    box-shadow: 0 8px 16px 0 rgba(0,0,0,0.2);
+}
+
+
+
+</style>
+
+
+  </head>
+  <body style="background: linear-gradient(141deg, #0fb8ad 0%, #1fc8db 51%, #2cb5e8 75%);opacity: 0.95; background-size: cover; height:100%;
+   width:100%;" >
+    {% include 'includes/_navbar.html' %}
+    <div class="container">
+      {% include 'includes/_messages.html' %}
+      {% block body %}{% endblock %}
+<!--hakjhdkahs -->    
+</div>
+
+ </body>
+  <!--  <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script> -->
+ <!--   <script src="//cdn.ckeditor.com/4.6.2/basic/ckeditor.js"></script>
+    <script type="text/javascript">
+      CKEDITOR.replace('editor')
+    </script>   -->
+{% block script %}{% endblock %}
+
+ <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
+	<script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js" integrity="sha384-Tc5IQib027qvyjSMfHjOMaLkfuWVxZxUPnCJA7l2mCWNIpG9mGCD8wGNIcPD7Txa" crossorigin="anonymous"></script>
+
+</html>
