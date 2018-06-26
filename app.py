@@ -22,8 +22,25 @@ app.config['MYSQL_DB'] = 'Registration'
 mysql = MySQL(app)
 
 #connect to database two
-conn = pymysql.connect(host='10.14.88.224', user='root', password='sensor_cloud', db='SENSORS')
+#conn = pymysql.connect(host='10.14.88.224', user='root', password='sensor_cloud', db='SENSORS')
+fip = pymysql.connect(host='10.14.88.224', user='root', password='sensor_cloud', db='neutron')
+k=""
+ip=""
+"""
+def floatip():
 
+	try:
+		with fip.cursor() as curs:
+			sql = "select status,floating_ip_address from floatingips where status=%s"
+			ip1 = curs.execute(sql,('DOWN'))
+			ip2=curs.fetchone()
+			ip=str(ip2[1])
+			return ip
+
+	finally:
+
+		conn.close()
+"""		
 # Index
 @app.route('/')
 def index():
@@ -32,15 +49,14 @@ def index():
 
 # Register Form Class
 class RegisterForm(Form):
-    Firstname = StringField('Firstname', [validators.Length(min=1, max=50)])
+	Firstname = StringField('Firstname', [validators.Length(min=1, max=50)])
+	Lastname = StringField('Lastname', [validators.Length(min=1, max=50)])
 #    username = StringField('Username', [validators.Length(min=4, max=25)])
-    Email = StringField('Email', [validators.Length(min=6, max=50)])
-    Password = PasswordField('Password', [
-        validators.DataRequired(),
-        validators.EqualTo('confirm', message='Passwords do not match')
-    ])
-    confirm = PasswordField('Confirm Password')
-
+	Email = StringField('Email', [validators.Length(min=6, max=50)])
+	Password = PasswordField('Password', [validators.DataRequired(), validators.EqualTo('confirm', message='Passwords do not match')])
+	confirm = PasswordField('Confirm Password')
+	Address = StringField('Address', [validators.Length(min=6, max=200)])
+	Phone = StringField('Phone', [validators.Length(min=10, max=11)])
 
 # User Register
 @app.route('/register', methods=['GET', 'POST'])
@@ -48,26 +64,38 @@ def register():
     form = RegisterForm(request.form)
     if request.method == 'POST' and form.validate():
         Firstname = form.Firstname.data
+	Lastname = form.Lastname.data
         Email = form.Email.data
 #        username = form.username.data
         Password = sha256_crypt.encrypt(str(form.Password.data))
-
+	Address = form.Address.data
+	Phone = form.Phone.data
         # Create cursor
         cur = mysql.connection.cursor()
 
         # Execute query
-        cur.execute("INSERT INTO Users (Firstname, Email, Password) VALUES(%s, %s, %s)", (Firstname, Email, Password))
+        cur.execute("INSERT INTO Users (Firstname,Lastname, Email, Password, Add1, Cell) VALUES(%s, %s, %s, %s, %s, %s)", (Firstname, Lastname, Email, Password, Address, Phone))
 
         # Commit to DB
         mysql.connection.commit()
 
         # Close connection
         cur.close()
-
+	time.sleep(2)
+	subprocess.call(["python","/home/devstack/Desktop/Sensor_login/test.py"])
+	#test.myfunction()
+	time.sleep(2)
         flash('You are now registered and can log in', 'success')
-	subprocess.call('python /home/devstack/Desktop/login/instance.py',shell=True)
-	time.sleep(3)
+	#subprocess.call('python /home/devstack/Desktop/login/instance.py',shell=True)
+	#k= str(subprocess.check_output(["bash","/home/devstack/Desktop/login/create.sh"]))	
+	
+	#ip=floatip()
+	#time.sleep(3)
+	
+	
 	flash('Cloud instance initiated','success')
+	#flash(k)
+	#flash(ip)
         return redirect(url_for('login'))
     return render_template('register.html', form=form)
 
@@ -96,7 +124,8 @@ def login():
                 # Passed
                 session['logged_in'] = True
                 session['Firstname'] = Firstname
-
+		if Firstname == 'admin':
+			return redirect(url_for('admin'))
                 flash('You are now logged in', 'success')
                 return redirect(url_for('dashboard'))
             else:
@@ -132,7 +161,10 @@ def logout():
 @app.route('/results', methods=['GET', 'POST'])
 @is_logged_in
 def results():
+
+	conn = pymysql.connect(host='10.14.88.224', user='root', password='sensor_cloud', db='SENSORS')
 	data = None
+	value = None
 	if request.method == 'POST':
 #		selected_users = request.form.getlist("users")
 		data = request.form['data']
@@ -140,34 +172,96 @@ def results():
 		region = str(data[1:mid-1])
 		senType = str(data[mid+2:len(data)-1])
 #		params=(region,senType)
-	#	return str(len(senType))
+#		return str(len(senType))
 #		return data
-
+#		value = 1
+		
 		try:
 			with conn.cursor() as cur2:
-				sql = "SELECT DATA FROM SENSOR WHERE Region=%s AND Type=%s"
+				sql = "SELECT Data FROM SENSOR WHERE Region=%s AND Id=%s"
 				result = cur2.execute(sql,(region,senType))
-				result = cur2.fetchall()
-				conn.commit()
+				result = cur2.fetchone()
+				print(region+':'+senType+'>'+result[0])				
+				print result
+#				time.sleep(0.3)
+#				cur2.close()
+				return result[0]
+#				conn.commit()
 				for res in result:
-					for r in res:
-						value = r					
+					value = res
+										
 				
-				
+										
+#			conn.close()
+#		finally:
+#			return "session is okay"
+#			return str(value)
 			if(result > 1):
-				return str(value)		
+#				conn.close()
+				return str(value)
+#			return "success"		
 			else:
-				return "error"
-		finally:
-			return str(value)			
+				return "error"			
 			
-		
-					
+		finally:
+#			
+			conn.close()	
+#			flash('Your session is active','success')	
+#			conn.close()			
+#			print str(value)
+#			return str(value)
+
+#######ADMIN#######
+@app.route('/admin',methods=['GET', 'POST'])
+@is_logged_in
+def admin():
+	conn = pymysql.connect(host='10.14.88.224', user='root', password='sensor_cloud', db='SENSORS')
+	conn1 = pymysql.connect(host='10.14.88.224', user='root', password='sensor_cloud', db='Registration')	
+	try: 		
+		with conn.cursor() as cur2, conn1.cursor() as cur3:
+			sql = "SELECT COUNT(DISTINCT Region) FROM SENSOR"
+			rest1 = cur2.execute(sql)
+			conn.commit()
+			Regions = cur2.fetchall()
+			sql2 = "SELECT DISTINCT Type FROM SENSOR"
+			rest2 = cur2.execute(sql2)
+			conn.commit()
+			Types = cur2.fetchall()	
+			sql3 = "select cast(Status as unsigned) as Status from SENSOR"
+			rest3 = cur2.execute(sql3)
+			conn.commit()
+			count=0
+			Status = cur2.fetchall()
+			for status in Status:
+				for s in status:
+					if s!=1:
+						count+=1
+					else:
+						continue
+			sql4 = "select count(Id) from Users"
+			rest4 = cur3.execute(sql4)
+			conn1.commit()
+			Idno = cur3.fetchall()	
+						
+			return render_template('admin.html',region=Regions[0][0], types=Types, status=count, idno=Idno[0][0])	
+	finally: 
+		conn.close()
+		conn1.close()
+
+
+
+
+@app.route('/about')
+def about():
+	return render_template('about.html')
+
+
 
 # Dashboard
 @app.route('/dashboard')
 @is_logged_in
 def dashboard():
+	conn = pymysql.connect(host='10.14.88.224', user='root', password='sensor_cloud', db='SENSORS')
     # Create cursor
 #    cur = mysql.connection.cursor()
 	selected_sensors = request.form.getlist('r')
@@ -192,33 +286,41 @@ def dashboard():
 					for R in Reg:
 						X.append(R)
 				for Reg in Regions:
-					sql = "SELECT Type FROM SENSOR WHERE Region=%s"
+					sql = "SELECT Id,Type FROM SENSOR WHERE Region=%s"
 					res2 = cur1.execute(sql,(Reg))
 					conn.commit()
 					sensors=cur1.fetchall()
+					print sensors
 					Y.append(Reg)
 					Y.append(sensors)
+#					for S in sensors:
+#						print S
 #					for sen in sensors:
 #						for s in sen:
 #							Y.append(s)
-
+#				for Reg in Regions:
+#					sql = "SELECT Id FROM SENSOR WHERE Region=%s"
+					
 #				for y in Y:
 #					for i in y:
 #						Z.append(i)
 
 #		print(len(Y), file=sys.stderr)
 		if res1 > 0:	
+			print Y
 		        return render_template('dashboard.html', Regions=Y)
 #, sel_sensors=selected_sensors)
 		else:
 		        msg = 'No Articles Found'
 			return render_template('dashboard.html', msg=msg)
 	finally:
+#		cur1.close()
 		if 'logged_in' in session:		
 			flash('Your session is active','success')
 		else:
-			conn.close()	
-
+#			cur1.close()	
+			flash('Your session is inactive','danger')
+			conn.close()
 
 
 #@app.route('/process', methods=['POST'])

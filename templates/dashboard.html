@@ -2,28 +2,32 @@
 {% block style %}
 
 <style>
+
 .card {
     box-shadow: 0 2px 4px 0 rgba(0,0,0,0.2);
-    
+ 
     
 }
 
-.card:hover, .card:focus {
+.card:hover, .card:focus , {
     box-shadow: 0 8px 16px 0 rgba(0,0,0,0.2); 
     transition: 0.8s;
+
 }
+
 
 </style>
 
 {% endblock %}
 
 {% block body %}
-  <h1>Sensor Cloud <small> Welcome {{session.Firstname}}</small></h1>
+<div style="padding:30px;background-color: transparent;background: url('/static/sensor.png') fixed center no-repeat;">
+  <h1 style="background-color: transparent;"> Welcome <small> {{session.Firstname}}</small></h1>
  <!--
   <hr>
 -->
-<br>
-<div class="container" style="width:100%" >
+<br style="background-color: transparent;" > 
+<div class="container" style="width:100%;" >
 	<!-- Single button -->
 <div class="row">
 {% for Region in Regions %}
@@ -32,11 +36,12 @@
 
 {% for Reg in Region %}
 
-<div class="card col-sm-3"> 
+<div class="card col-sm-3" style=" padding: 5px; margin:10px;background-color: transparent;"> 
+ <img src="/static/motion-sensor.png" style="width:50%;opacity:0;" alt="">
 <form action="" method="GET" style="padding: 5px" id="{{ Reg }}" name="{{ Reg }}" onsubmit="" >
 
 
-<div class="btn-group">
+<div class="btn-group" >
   <button type="button" class="btn btn-default dropdown-toggle btn-sm" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false" onclick="saveRegion('{{ Reg }}')" style="width: 140px" > 
 
 {{Reg}}
@@ -45,17 +50,21 @@
 <span class="caret"></span>
   </button>
 	
-  <ul class="dropdown-menu">
+  <ul class="dropdown-menu but2">
+	{% set count = namespace(a=0) %}
     {% for R in Regions[Regions.index(Region)+1] %}
+	
     <li>
+	
 	{% for r in R %}
+	 {% if R.index(r)%2==0 %}
 	<!--	<form action="" method=""> -->
 		<div class="form-check" style="padding:5px; ">
-  		{{ r }}<input class="form-check-input pull-right" type="checkbox" value="{{ r }}" id="{{ r }}" >
-					
-				
+  		{{ R[1] }}<input class="form-check-input pull-right" type="checkbox" value="{{ r }}" id="{{ r }}" name="{{ r }}" onclick="saveSensor('{{ r }}')" >
+		{% else %}{% endif %}						
 	{% endfor %}
 		</div>
+{% set count.a = count.a + 1 %}
 	<!--	</form>  -->
 </li>
 
@@ -147,7 +156,7 @@
 
 </div>
 <br>
-
+</div>
 {% endblock %}
 
 {% block script %}
@@ -158,24 +167,67 @@
 
 var data=[];
 var region=[''];
-var R = 'l';
+var R = '';
 //var result=[];
 var i=0;
+//console.log(region.length);
 	function saveRegion(Reg){
-		if(region.indexOf(Reg)>0){
+		
+		R=Reg;
+//		alert(R);	
+//	if(region.indexOf(Reg)>0){
 
-		}
-		else{		
-		region.push(Reg);
+	//	}
+	//	else{		
+	//	region.push(Reg);
 //		alert(region[i+1]);
-		++i;}		
+	//	++i;}		
 //		R = Reg;
+	console.log(region.length);
+		}
+	function saveSensor(r){
+//	alert(r);
+   var checkBox = document.getElementById(r);
+//	alert(checkBox.value);
 	
-		}	
+    if (checkBox.checked == true){
+//	region.push(R);	
+// 	alert("checked");
+	
+//	console.log(region.indexOf(R));
+	if(region.indexOf(R)>=0){
+	console.log("region present");	
+	}
+	else{	
+	
+	region.push(R)
+	}
+
+	}
+ 	else{
+//		region.push(R);
+// 	alert("unchecked");
+//		console.log("region not present");
+//alert(region);
+	}  }      
+/*		
+	$('#'+r).change(function(){
+	if(this.checked){
+		alert("checked");	
+	}
+	});
+    } 
+
+*/	
+
+
+
+	
+	
 
 	function checkCheckbox(){
 		result = [];
-		if(region.length == 1){
+		if(region.length <=1){
 			alert("Please select");
 		}
 /*		var unique = [];
@@ -185,7 +237,7 @@ var i=0;
 
 		for(var k = 0; k<unique.length();++k){
 		
-*/		
+*/		console.log(region.length);
  		for(let k =1; k < region.length ;++k ){
 		//alert(region[k]);
 		$('#'+ region[k] + ' input[type="checkbox"]').each(function(){
@@ -209,11 +261,15 @@ var i=0;
 			output = []; 		
 			for (let i =0; i < result.length; ++i) {
   				output.push(' '+result[i].region+' : '+result[i].type+' ');			
-
+				console.log("...."+output[i]+".....");
+				
 /////////////////////////////////////////////////////////
+
 value = []	
 $.post( "/results", {
-    data : output[i]
+    data : output[i],
+//    timeout: 200,
+	
 })
 .done(function(data){
 console.log(data);
@@ -221,7 +277,7 @@ value.push(data);
 $('#errorAlert').text(value).show();
 });
 
-
+//setTimeout(function(){console.log("hold");},3000);
 
 			
 
@@ -256,6 +312,7 @@ $('#errorAlert').text(value).show();
 			console.log(output);
 			delete output;
 			delete result;
+//			delete value;
 			//console.log(output);
 			//console.log(result);
 	

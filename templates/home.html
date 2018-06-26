@@ -1,13 +1,84 @@
 {% extends 'layout.html' %}
 
+
+{% block div %}
+   <div class="jumbotron back" style="background-image: url('/static/backg.png');background-color: transparent;" >
+<!--
+<img src="/static/back.png"/ width="1920" height="1080" class="cover">
+
+-->
+
+
+    <div class="wave-one floating" style="display:none;" >
+  </div>
+  <br>
+
+    <div class="wave-two floating3" style="display:none;" >
+  </div> 
+  <div class="wave-three floating4" style="display:none;" >
+  </div>
+  
+  <div class="wave-threeb floating2"style="display:none;" >
+  </div>
+
+
+{% endblock %}
+
 {% block body %}
-  <div class="jumbotron text-center" style="background-color: transparent" >
-    <h1>Welcome to SWAN</h1>
-    <h2>Sensor Cloud</h2>
+
+  
+<br>
+
+
+  <div class="jumbotron text-center" style="background-color: transparent; color:#000;padding-bottom:0;" >
+ 
+
+    <h1 class="Shead" >Welcome to SWAN</h1>
+    <h2>Sensor Cloud Platform</h2>
     <p class="lead">Virtualization of Sensors</p>
     {% if session.logged_in == NULL %}
-      <a href="/register" class="btn btn-primary btn-lg">Register</a>
-      <a href="/login" class="btn btn-success btn-lg">Login</a>
+	<a href="/" class="btn btn-primary btn-lg" style="display:none;" >Home</a>
+      <a href="/register" class="btn btn-primary btn-lg"  style="display:none;" >Register</a>
+      <a href="/login" class="btn btn-success btn-lg" style="display:none;" >Login</a>
     {% endif %}
+
+
+ <div class="row" style="text-align: center; ">
+<div class="card col-sm-4 midd" style=" background-image: url('/static/dynamic.png');"> 
+<h2><strong>
+Dynamic
+</strong>
+</h2>
+</div>
+<div class="card col-sm-4 midd" style="background-image: url('/static/control.png');"> 
+<h2><strong>
+Controlled
+</strong>
+</h2>
+</div>
+<div class="card col-sm-4 midd" style="background-image: url('/static/share.png');"> 
+<h2><strong>
+Direct Sharing
+</strong>
+</h2>
+</div>
+
   </div>
+<!--
+<div class="center" style="padding: 70px 0;  text-align: center;">
+  <p></p>
+</div>
+-->
+<div class="center cent" style="background-image: url('/static/realtime.png');">
+  <p>Enter into an application specific world of Real Time Data.</p>
+</div>
+
+
+<div class="center cent" style="background-image: url('/static/increas.png');">
+  <p>Increased utility of physical sensors- simultaneous service to multiple endpoins</p>
+</div>
+<div class="center cent" style="background-image: url('/static/coins.png');">
+  <p>Cost Effective Services- Pay per use</p>
+</div> 
+</div>
 {% endblock %}

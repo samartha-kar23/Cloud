@@ -1,8 +1,9 @@
 {% extends 'layout.html' %}
 
 {% block body %}
+<div class="login">
   <h1>Login</h1>
-  <form action="" method="POST">
+  <form action="" method="POST" class="loginform" >
     <div class="form-group">
       <label>Firstname</label>
       <input type="text" name="Firstname" class="form-control" value={{request.form.Firstname}}>
@@ -13,4 +14,5 @@
     </div>
     <button type="submit" class="btn btn-success">Submit</button>
   </form>
+</div>
 {% endblock %}
