@@ -2,83 +2,179 @@
 
 
 {% block div %}
-   <div class="jumbotron back" style="background-image: url('/static/backg.png');background-color: transparent;" >
+<div class="jumbotron back" style="" >
 <!--
 <img src="/static/back.png"/ width="1920" height="1080" class="cover">
 
 -->
 
 
-    <div class="wave-one floating" style="display:none;" >
-  </div>
-  <br>
+<div class="wave-one floating" style="display:none;" >
+</div>
 
-    <div class="wave-two floating3" style="display:none;" >
-  </div> 
-  <div class="wave-three floating4" style="display:none;" >
-  </div>
-  
-  <div class="wave-threeb floating2"style="display:none;" >
-  </div>
+
+<div class="wave-two floating3" style="display:none;" >
+</div> 
+<div class="wave-three floating4" style="display:none;" >
+</div>
+
+<div class="wave-threeb floating2"style="display:none;" >
+</div>
 
 
 {% endblock %}
 
 {% block body %}
 
+
+
+
+
+<div class="jumbotron text-center" style="background-color: transparent; color:#000;padding-bottom:0; padding-top:0;" >
+
+
   
+  {% if session.logged_in == NULL %}
+  <a href="/" class="btn btn-primary btn-lg" style="display:none;" >Home</a>
+  <a href="/register" class="btn btn-primary btn-lg"  style="display:none;" >Register</a>
+  <a href="/login" class="btn btn-success btn-lg" style="display:none;" >Login</a>
+  {% endif %}
+<div class="row" style="text-align: center; background-image: url('/static/carousel.gif');  background-repeat: no-repeat;background-size: 100% auto; background-position: center center; color: #fff; padding-bottom:0; margin-top:23px;">
+    <div class=" col-sm-12 midd" style="background-color:#000;opacity:0.4; text-align:center; ">
+<img src="/static/logoALL.png" style="width: 60%; height: auto;  " />
+
+    <!--    <p><h2 style="color:#fff"> </h2></p> -->
+    <p class="lead" style=" font-style:oblique; color:#fff; "> An Integrated Digital Farming Platform.</p>
+
+
+ </div>
+  </div>
+
+
+<div 
+
+<!----- applications ---->
+
+
+<div class="card" >
+  <div class="row" style="text-align: justify; ">
+	 <div class=" col-sm-12 midd" style=" padding:20px; color:#145a32;background-color:#fff">
+<p style="text-align: center; color: #2471a3 " ><i><b>"If agriculture goes wrong, nothing else will have a chance to go right in the country."</b></i><br></p>
+   <p style="text-align: right; padding-right:40px; color: #2471a3"><i>- M.S.Swaminathan </i></p>                                                                                             
+The agro-sensor-cloud is a unique platform, where multiple farmers/users can get different agricultural services such as irrigation management, crop health monitoring, and crop security. Additionally, in this system, there is a provision to get raw data of different environmental parameters, which include temperature, humidity, rainfall, and moisture. The agro-sensor-cloud system consists of a Web-based user-friendly interface through which the users can easily monitor the situations of a particular field. The system is based on the pay-per-use model, and therefore, a user needs to pay for the services based on the usage. The users are completely abstracted from the backend architecture, equipment, and the logic used for particular services. The agro-sensor-cloud primarily provides three types of services--Irrigation, Crop-Health, and Crop-Security.
+
+</div>
+  </div>
+<hr>
+<div class="row" style=";">
+     <div class="col-sm-12" style="color:#145a32;text-align:center; padding:20px; font-size:25px;"> Login for Services </div> 
+</div>
+  <div class="row" style="text-align: center; ">
+	<a href="/login/irrigation" onMouseOver="this.style.color='#145a32'" style="text-decoration: none;" >  
+    <div class="col-sm-4 midd2" style=" background-image: url('/static/irrigation.png'); padding-top: 5%;color: #145a32;"> 
 <br>
+      <h3><strong>
+      
+	Irrigation
+	
+      </strong>
+    </h3>
+  
+
+  </div></a>
+	<a href="/login/health" onMouseOver="this.style.color='#145a32'" style="text-decoration: none;" >  
+  <div class=" col-sm-4 midd2" style="background-image: url('/static/health.png');padding-top: 5%;color: #145a32;"> 
+<br>
+    <h3><strong>
+      Crop Health
+    </strong>
+  </h3>
+  
+
+</div></a>
+	<a href="/login/security" onMouseOver="this.style.color='#145a32'" style="text-decoration: none;" >  
+<div class=" col-sm-4 midd2" style="background-image: url('/static/security.png');padding-top: 5%;color: #145a32;"> 
+<br>
+  <h3><strong>
+    Crop Security
+  </strong>
+</h3>
 
 
-  <div class="jumbotron text-center" style="background-color: transparent; color:#000;padding-bottom:0;" >
- 
+</div></a>
 
-    <h1 class="Shead" >Welcome to SWAN</h1>
-    <h2>Sensor Cloud Platform</h2>
-    <p class="lead">Virtualization of Sensors</p>
-    {% if session.logged_in == NULL %}
-	<a href="/" class="btn btn-primary btn-lg" style="display:none;" >Home</a>
-      <a href="/register" class="btn btn-primary btn-lg"  style="display:none;" >Register</a>
-      <a href="/login" class="btn btn-success btn-lg" style="display:none;" >Login</a>
-    {% endif %}
-
-
- <div class="row" style="text-align: center; ">
-<div class="card col-sm-4 midd" style=" background-image: url('/static/dynamic.png');"> 
-<h2><strong>
-Dynamic
-</strong>
-</h2>
 </div>
-<div class="card col-sm-4 midd" style="background-image: url('/static/control.png');"> 
-<h2><strong>
-Controlled
-</strong>
-</h2>
 </div>
-<div class="card col-sm-4 midd" style="background-image: url('/static/share.png');"> 
-<h2><strong>
-Direct Sharing
-</strong>
-</h2>
+
+
+<!-----applications ---->
+
+
+
+<div class="card" >
+  <div class="row" style="text-align: center;">
+    <div class=" col-sm-12 midd" style=" padding-top: 20px;color:#fff;background-color:#145a32 ">
+ <h2>
+       Why SWAN Sensor Cloud?
+    </h2>
+ </div>
+    <div class=" col-sm-12 midd" style=" padding: 20px;color:#fff;background-color:#145a32;text-align:justify; " >
+
+The farmers need to monitor different agricultural parameters such as soil moisture and water-level for better farming. However, in such monitoring process, the farmers need to procure and deploy the sensor nodes, which are appropriate for sensing the data of respective parameters. Moreover, the crop destruction is one of the major issues for the farmers. The crop may be destructed either by the animals or fire. Consequently, for monitoring the crop destruction, a farmer needs to procure expensive cameras or set-up an alert generation system in the field. Additionally, the farmers must have a fair experience in different aspects (such as which system will be appropriate for his/her field, from which vendor the system should be procured, the correct deployment and maintenance of the system) in purchasing the expensive equipment and systems. The Agro-Sensor-Cloud system abolishes the burden of the farmers by providing different technological solutions to monitor the farming. 
 </div>
+  </div>
+  <div class="row" style="text-align: center; ">
+    <div class="col-sm-4 midd" style=" background-image: url('/static/dynamic.png'); padding: 10px;color: #145a32;"> 
+      <h3><strong>
+        Dynamic
+      </strong>
+    </h3>
+    <br>
+<div style="text-align:justify;padding: 15px;">
+      Our Agro-sensor-cloud platform provides the agricultural data dynamically with the change in soil conditions and other environmental parameters such as temperature, rainfall, and humidity.
+    </div>
 
   </div>
+  <div class=" col-sm-4 midd" style="background-image: url('/static/controlled.png');padding: 10px;color: #145a32;"> 
+ 
+    <h3><strong>
+      Pay-per-use
+    </strong>
+  </h3> 
+  <br>
+<div style="text-align:justify;padding: 15px;">
+   With our pay-per-use model, pay only for the usage of services. Register and de-register with the Agro-sensor-cloud at any time. Consequently, controlling the usage of our services as per your wish.
+  </div>
+</div>
+<div class=" col-sm-4 midd" style="background-image: url('/static/automatic.png');padding: 10px;color: #145a32;"> 
+  <h3><strong>
+    Automatic
+  </strong>
+</h3>
+<br>
+<div style="text-align:justify;padding: 15px;">
+  Only a click away system providing you the services automatically as per the requirements. And with this you need not to worry about the types of equipment used for a particular service.
+</div>
+</div>
+
+</div>
+</div>
 <!--
 <div class="center" style="padding: 70px 0;  text-align: center;">
   <p></p>
 </div>
--->
-<div class="center cent" style="background-image: url('/static/realtime.png');">
+
+<div class="center cent" style="background-image: url('/static/shuffle.png');">
   <p>Enter into an application specific world of Real Time Data.</p>
 </div>
 
 
 <div class="center cent" style="background-image: url('/static/increas.png');">
-  <p>Increased utility of physical sensors- simultaneous service to multiple endpoins</p>
+  <p>Increased utility providing ability to scale up your projects.</p>
 </div>
 <div class="center cent" style="background-image: url('/static/coins.png');">
-  <p>Cost Effective Services- Pay per use</p>
+  <p>Cost Effective Services for which you pay per use.</p>
 </div> 
-</div>
+</div> -->
 {% endblock %}
+

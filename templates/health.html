@@ -72,7 +72,7 @@
     #sidebar {
       min-width: 250px;
       max-width: 250px;
-      background: #116158;
+      background:  #943126 ;
       color: #fff;
       transition: all 0.6s cubic-bezier(0.945, 0.020, 0.270, 0.665);
       transform-origin: bottom left;
@@ -85,7 +85,7 @@
 
     #sidebar .sidebar-header {
       padding: 20px;
-      background: #116158;
+      background:  #943126 ;
     }
 
     #sidebar ul.components {
@@ -104,13 +104,13 @@
       display: block;
     }
     #sidebar ul li a:hover {
-      color: #116158;
+      color:  #943126 ;
       background: #fff;
     }
 
     #sidebar ul li.active > a, a[aria-expanded="true"] {
       color: #fff;
-      background: #116158;
+      background:  #943126 ;
     }
 
 
@@ -134,7 +134,7 @@
     ul ul a {
       font-size: 0.9em !important;
       padding-left: 30px !important;
-      background: #116158;
+      background:  #943126 ;
     }
 
     ul.CTAs {
@@ -151,16 +151,16 @@
 
     a.download {
       background: #fff;
-      color: #116158;
+      color:  #943126 ;
     }
 
     a.article {
-      background: #116158 !important;
-      color: #fff !important;
+      background:  #943126  ;
+      color: #fff ;
     }
     a.article:hover {
-      background: #fff !important;
-      color: #116158 !important;
+      background: #fff;
+      color:  #943126  ;
       transition: 0.6s;
     }
 
@@ -206,11 +206,17 @@
       opacity: 1;
       margin: 5px auto;
     }
-		 .card {
+	 .card {
 		transition: 0.4s;
 		box-shadow: 0 8px 16px 0 rgba(0,0,0,0.2);border-radius: 20px;
-		color: #145a32;
+		color:  #943126 ;
 	}
+	.On {
+	color:#4fb117;
+    }	
+	.Off {
+	color: #d62626;
+    }
 
 /* ---------------------------------------------------
     MEDIAQUERIES
@@ -269,43 +275,47 @@
     <!-- Sidebar Holder -->
     <nav id="sidebar">
       <div class="sidebar-header">
-        <h3>AGRO Command <br> Console</h3>
+        <h3>Sensor <br> Console</h3>
       </div>
 
       <ul class="list-unstyled components">
-        <p>Welcome <br> Admin</p>
+        <p>Welcome <br> {{ session.Firstname }}</p>
         <li>
           <a href="#pageSubmenu" data-toggle="collapse" aria-expanded="false">View</a>
           <ul class="collapse list-unstyled" id="pageSubmenu">
-            <li><a href="#" id="users">Users</a></li>
             <li><a href="#" id="regions" >Regions</a></li>
             <li><a href="#" id= "sensors">Type</a></li>
             <li><a href="#" id= "senno">Sensors</a></li>
           </ul>
-          <a href="#pageSubmenu" data-toggle="collapse" aria-expanded="false">Update</a>
+  <!--        <a href="#pageSubmenu" data-toggle="collapse" aria-expanded="false">Update</a>
           <ul class="collapse list-unstyled" id="pageSubmenu">
             <li><a href="#">Users</a></li>
             <li><a href="#">Regions</a></li>
             <li><a href="#">Sensors</a></li>
-          </ul>
-          <a href="#" id="inst" onClick="">Instances</a>
+          </ul>  -->
+     <!--     <a href="#" id="inst" onClick="">Instances</a>  -->
         </li>
-        <li>
+    <!--    <li>
           <a href="#" id="fip">Floating IPs</a>
-        </li>
+        </li>   -->
         <li>
           <a href="http://cse.iitkgp.ac.in/~smisra/swan/contact.html" target="_blank">Contact</a>
         </li>
       </ul>
 
-      <ul class="list-unstyled CTAs">
+	<ul class="list-unstyled CTAs">
 
-        <li><a href="/" target="_blank" class="article">Preview Website</a></li>
+        <li><a href="" target="" class="article" id="OffPump"  style="background: #d62626;" >Water Stress Level</a></li>
       </ul>
+<ul class="list-unstyled CTAs">
+
+        <li><a href="" target="" class="article"  style="background:  #3498db; ">View Images</a></li>
+      </ul>
+
     </nav>
 
     <!-- Page Content Holder -->
-    <div id="content" style="width:100%; height:auto;" >
+    <div id="content" style="width: 100%; height: auto;" >
 
       <nav class="navbar navbar-default">
         <div class="container-fluid">
@@ -319,9 +329,14 @@
           </div>
 
           <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
+		 <ul class="nav navbar-nav navbar-left">		
+	
+		<li><a href="#" style="font-size:18px; font-style:oblique;">Smart Crop Health</a></li> </ul>
             <ul class="nav navbar-nav navbar-right">
-     <!--       <li><a href="#">Page</a></li>
-     --><li><a href="#">Sensor status</a></li> 
+       
+	 <li><a href="#" style="color:#66ca0e ;" >Crop Health</a></li> 
+	
+        <li><a href="#">Sensor status</a></li> 
      
      {% if status > 0 %}
      
@@ -337,49 +352,55 @@
  </div>
 </div>
 </nav>
-<div class="btn-group" style="float:right; margin-right:30px;" >
-  <button type="button" class="btn btn-default dropdown-toggle" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-    Downloads<span class="caret"></span>
-  </button>
-  <ul class="dropdown-menu">
-    <li style="text-align:center">Setup Manuals v1.0</li>
-    <li role="separator" class="divider"></li>
-    <li><a href="/static/SENSOR CLOUD SETUP MANUAL.pdf">Sensor Cloud</a></li>
-    <li><a href="/static/SENSOR NODE SETUP MANUAL.pdf">Sensor Node</a></li>
-  </ul>
-</div>
-<div style="padding: 20px;" >
-<h3>Instructions</h3>
-<p  >Kindly use the side panel for monitoring sensor activity and updating various data stores.</p>
-</div>
-<div id="Users" class=" nav nav-bar card" style="float: left; padding:20px; text-align:center; margin:10px; " >
-<h2>Users</h2>
-  <div class="c100 p{{ idno }} orange" style="margin:0px;" >
-    <span>{{ idno }}</span>
-    <div class="slice">
-      <div class="bar"></div>
-      <div class="fill"></div>
-    </div>
 
-  </div>
-  
-</div>
-  
-<div id="Regions" class=" nav nav-bar card" style="float:left; padding:20px; text-align:center; margin:10px; " >
+<br>  
+{% for r in range(region) %}
+{% if r < 1 %}
+<div id="{{ r+1 }}" class="nav navbar-nav card" style="margin: 5px; padding: 20px; text-align:center;">
 
-  <h2>Regions</h2>
-  <div class="c100 p{{ region }}">
-    <span>{{ region }}</span>
+  <h2>Region {{ r+1 }}</h2>
+
+
+	 <ul style="" >  
+	{% for i in range(data|length) %}
+		{% for j in data[i] %}
+		{% if data[i].index(j) == 0 %}
+		{% if i< 4 and r == 0 %}
+		<div>
+		<li style="margin-top:120px;">  {{ j }}
+			<div class="c100 p{{ value1[i] }} green">
+    <span>{{ data[i][3] }}</span>
     <div class="slice">
       <div class="bar"></div>
       <div class="fill"></div>
     </div>
   </div>
-  
+		</li> </div> 
+		{% elif i>5 and r == 1 %}
+			<div>
+		<li style="margin-top:120px;">  {{ j }}
+			<div class="c100 p{{ value1[i] }} green">
+    <span>{{ data[i][3] }}</span>
+    <div class="slice">
+      <div class="bar"></div>
+      <div class="fill"></div>
+    </div>
+  </div>
+		</li> </div>  
+		{% endif %}
+		{% endif %}
+	        {% endfor %}
+		{% endfor %}
+</ul>		
 </div>
 
+{% endif %}
+{% endfor %}
 
-<div id="Sensors" class=" nav nav-bar card" style="float: left; padding:20px; text-align:center; margin:10px; " >
+
+
+
+<div id="Sensors" class="nav navbar-nav card" style="margin: 5px; padding: 20px; text-align:center;">
   <h2>Sensor Types</h2>
   <ul>
    {% for type in types %}
@@ -392,11 +413,12 @@
 
 </div>
 
-<div id="Senno" class=" nav nav-bar card" style="float: left; padding:20px; text-align:center; margin:10px; " >
 
-  <h2>Sensors Running</h2>
-  <div class="c100 p{{ 50-status }} green">
-    <span>{{ 50-status }}</span>
+<div id="Senno" class="nav navbar-nav card" style="margin: 5px; padding: 20px; text-align:center;">
+
+  <h2>Sensors </h2><br> 
+  <div class="c100 p{{ 24 }} orange">
+    <span>{{ 4 }}</span>
     <div class="slice">
       <div class="bar"></div>
       <div class="fill"></div>
@@ -404,19 +426,11 @@
   </div>
   
 </div>
-<div id="Console" class=" nav nav-bar card" style="float: left; padding:20px; text-align:center; margin:10px; " >
-
-  <h2>Console > </h2>
- <form action="">
-  <div class="form-group">
-    
-    <input type="input" class="" id="comm">
-  </div>
-  
-  <button type="submit" id="run" class="btn btn-success" style="float:right;">Run</button>
-</form> 
-  </div>
-
+<br>
+<div class="nav navbar-nav">
+<h3>Instructions</h3>
+<p>Kindly use the side panel for monitoring sensor activity and updating various data stores.</p>
+</div>
 </div>
 </div>
 
@@ -424,25 +438,8 @@
 <script src='//ajax.googleapis.com/ajax/libs/jquery/1.11.0/jquery.min.js'></script>
 <script src='https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js'></script>
 
-<script>
-var data;
-$("#run").on("click", function() {
-data = $('#comm').val()
-alert(data);
-$.post( "/console", {
-	data : data,
-	
-})
-.done(function(data){
-	console.log(data);
-	alert(data);	
-//value.push(data);
-//$('#errorAlert').text(value).show();
-});
-});
-</script>
 
-<!--
+
 <script >
   $(document).ready(function() {
     $("#sidebarCollapse").on("click", function() {
@@ -451,34 +448,35 @@ $.post( "/console", {
     });
   });
       //# sourceURL=pen.js
+	
+	$("#OnPump").on("click", function() {
+      	$("#pump").css("color","#4fb117");
+	alert("pump on");
+    });
+	$("#OffPump").on("click", function() {
+      $("#pump").css("color","#d62626");
+	alert("pump off");
+ });
 
 
-      function showUsers(){
-        var x = document.getElementById("users");
-        if (x.style.display === "none") {
-          x.style.display = "block";
 
-        } else {
-          x.style.display = "none";
-        }
-      } 
 
       $(document).ready(function() {
-
         $("#instances").slideToggle(0);
 
         $("#floatip").slideToggle(0);
 
 
-        $("#Regions").slideToggle(1);
+        $("#1").slideToggle(0);
+	$("#2").slideToggle(0);
 
-
-        $("#Sensors").slideToggle(1);
-        $("#Users").slideToggle(1);
-        $("#Senno").slideToggle(1);
+        $("#Sensors").slideToggle(0);
+        $("#Users").slideToggle(0);
+        $("#Senno").slideToggle(0);
       });
       $("#regions").click(function(){
-        $("#Regions").slideToggle(1000);
+        $("#1").slideToggle(1000);
+	$("#2").slideToggle(1000);
       });
       $("#inst").click(function(){
         $("#instances").slideToggle(1000);
@@ -497,7 +495,7 @@ $.post( "/console", {
       });
     </script>
 
--->
+
 
     
     

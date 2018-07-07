@@ -1,523 +1,264 @@
 <!DOCTYPE html>
 <html>
-  <head>
-    <meta charset="utf-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Swan - Sensor Cloud</title>
- <!--   <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
--->
-<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css" integrity="sha384-BVYiiSIFeK1dGmJRAkycuHAHRg32OmUcww7on3RYdg4Va+PmSTsz/K68vbdEjh4u" crossorigin="anonymous">
-{% block head %}{% endblock %}
-{% block style %}{% endblock %}
-<style>
-* {
-	box-sizing: border-box;
-}
+<head>
+	<meta charset="utf-8">
+	<meta name="viewport" content="width=device-width, initial-scale=1.0">
+	<title>Swan - Sensor Cloud</title>
+	<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css" integrity="sha384-BVYiiSIFeK1dGmJRAkycuHAHRg32OmUcww7on3RYdg4Va+PmSTsz/K68vbdEjh4u" crossorigin="anonymous">
+	<link rel="stylesheet" href="https://www.w3schools.com/w3css/4/w3.css">
+	{% block head %}{% endblock %}
+	{% block style %}{% endblock %}
+	<style>
+	* {
+		box-sizing: border-box;
+	}
 
-body, html {
-	background: linear-gradient(141deg,  #f7f9f9 0%, #b3b6b7 
- 50%,  #95a5a6 75%);opacity: 0.95; background-size: cover; height:100%;
-   width:100%; position:relative;overflow-y:auto; margin:0; padding:0; overflow-x:hidden;
-	background-size: auto 100%;
-	font-size:16px;
-}
-/*
-.cover {
-  
-  width: 300px;
-  height: 200px;
-    float: left;
+	body, html {
+		background: linear-gradient(141deg,#e5e7e9 0%, #a6acaf 50%, #909497 75%);opacity: 0.95; background-size: cover; height:100%;
+		width:100%; position:relative;overflow-y:auto; margin:0; padding:0; overflow-x:hidden;
+		background-size: auto 100%;
+		font-size:16px; 
+	}
+	.login {
+		padding-right:390px; padding-left:390px; padding-bottom:290px;padding-top:190px;
 
-  top: 0;
-  left: 0;
-  
-  overflow: hidden;
-  opacity: 0.6;
-}
-*/
-/*
-.back{
-   
-    background-color: 
-	width:100%;
-	
-	text-align:center;
-	
-	
-}*/
-.login {
-	padding-right:390px; padding-left:390px; padding-bottom:290px;padding-top:190px;
+	}
+	.loginform {
+		box-shadow: 0 2px 4px 0 rgba(0,0,0,0.2);       
+		border-radius: 10px;
+		padding: 10px;
+	}
+	.register {
+		padding-left: 390px;padding-right: 390px; padding-top:100px; padding-bottom:70px;
+	}
+	.message {
+		padding-top:80px;
+		padding-left:30px;
+		padding-right:30px;
 
-}
-.loginform {
-	 box-shadow: 0 2px 4px 0 rgba(0,0,0,0.2);       
-	 border-radius: 10px;
-	 padding: 10px;
-}
-.register {
-	padding-left: 390px;padding-right: 390px; padding-top:100px; padding-bottom:70px;
-}
-.message {
-	padding-top:80px;
-	padding-left:30px;
-	padding-right:30px;
-	
-}
-.message > .alert {
-	border-radius: 20px;
-}
-.navbar-header{
-padding:10px;
-} 
+	}
+	.message > .alert {
+		border-radius: 20px;
+	}
+	.navbar-header{
+		padding:10px;
+
+	} 
 
 
 
-.navbar-brand {
-	
-font-size: 25px;	
-	
-}
+	.navbar-brand {
 
-.cent{
-	background-repeat: no-repeat;background-size: auto 60%;background-position: left 10% center;
-}
+		font-size: 25px;	
 
+	}
 
-.midd {
-	background-repeat: no-repeat;background-size: auto 60%;background-position: left 10% center;  color: #fff;
-}
-
-.back {
-	background-repeat: no-repeat;background-size: auto 60%;background-position: center top 10%;
-}
-.Shead {
-	padding-top:25%;
-}
-
-@media only screen and (max-width:620px){
-body, html {
-width:100%;
-}
-.navbar-header{
-margin-top:0;
-}
-.tile {
-visibility:hidden;
-font-size: 0;
-}
-.col-xs-6 {
-padding-left:0;
-padding-right:0;
-}
-.contact {
-padding-left:0;
-}
-.login {
- 	padding-right:10px; padding-left:10px; padding-bottom:60px;padding-top:80px;
-}
-.register {
-	padding-left: 10px;padding-right: 10px; padding-top:80px; padding-bottom:80px;
-
-}
-.message {
-	padding-top: 80px;
-}
-.center {
-	background-size: auto 30%;background-position: left 5% center;
-	
-}
-
-.center > p {
-	
-	text-align:right; padding-left: 25%; margin-right: 5%; margin-top: 10%; margin-bottom: 10%; 
-}
-
-.back {
-	background-repeat: no-repeat;background-size: auto 60%;background-position: center top 10%;
-}
-
-.back {
-	background-repeat: no-repeat;background-size: auto 80%;background-position: center top 10%;
-}
-.Shead {
-	padding-top:25%;
-}
-.jumbotron {
-background-position: center top 70px;
-background-size: auto 70%;
-margin:0;
-/*background: url('/static/backg.png') fixed center no-repeat ;
-*/
-}
-
-}
+	.cent{
+		background-repeat: no-repeat;background-size: auto 60%; background-position: left 10% center;
+	}
 
 
-
-@media only screen and (max-width:1100px)and (min-width:620px){
-.login {
- 	padding-right:10px; padding-left:10px; padding-bottom:60px;padding-top:80px;
-}
-.register {
-	padding-left: 10px;padding-right: 10px; padding-top:80px; padding-bottom:80px;
-
-}
-
-}
-
-
-.jumbotron {
-background-position: center top 70px;
-background-size: 50% auto;
-margin:0;
-/*background: url('/static/backg.png') fixed center no-repeat ;
-*/
-}
-/*
-.back {
-background-image: url("/static/back.png");
-background-size: contain;
-background-repeat:no-repeat;
-  position: relative;
-  top: 0;
-  left: 0;
-  z-index: 0;
-  overflow: hidden;
-  opacity: 0.9;
-border-color: #449d44; width: 100%; padding:19px; height:auto; margin:0; display:block;  vertical-align:baseline;position:absolute;
-
-}
-*/
-.row{
-border-radius: 10px;
+	.midd {
+		background-repeat: no-repeat;background-size: auto 18%;background-position: left 10% top 10%;  color: #fff; 
+	}
+.midd2 {
+		background-repeat: no-repeat;background-size: auto 50%;background-position: center top 15%;  color: #fff; 
+	}
+.midd2:hover, .midd2:focus, .midd2>a:hover, .midd2>a:focus  {
+		transition: 0.6s;
+		box-shadow: 0 8px 16px 0 rgba(0,0,0,0.2);border-radius: 20px;
+		color: #145a32;
 }
 
-.card {
-    box-shadow: 0 2px 4px 0 rgba(0,0,0,0.2);
-    background-color: #2e4dc1;
-    color: #fff
-	border-radius: 10px;
+	.back {
+		background-repeat: no-repeat;background-size: auto 60%;background-position: relative center top 30%; 
+	} 
+/*	.Shead {
+		padding-top:25%;
+		
+	} */
+	.lead {
+		color:#145a32;
+	}
+
+	@media only screen and (max-width:620px) and (min-width:250px){
+		body, html {
+			width:100%;
+			font-size:12px;
+			background: linear-gradient(141deg,#283747 0%, #212f3c 50%, #292b2c 75%);
+		}
+		.container {
+			color: #000;
+		}
+		.navbar-header{
+			margin-top:0;
+		}
+		.tile {
+			display: none;
+		}
+		.col-xs-6 {
+			padding-left:0;
+			padding-right:0;
+		}
+		.contact {
+			padding-left:0;
+		}
+		.login {
+			padding-right:10px; padding-left:10px; padding-bottom:60px;padding-top:80px;
+			color: #fff;
+		}
+		.register {
+			padding-left: 10px;padding-right: 10px; padding-top:80px; padding-bottom:80px; color: #fff;
+
+		}
+		.message {
+			padding-top: 80px;
+		}
+		.center {
+			background-size: auto 30%;background-position: left 5% center;
+
+		}
+
+		.center > p {
+
+			text-align:right; padding-left: 25%; margin-right: 5%; margin-top: 10%; margin-bottom: 10%; 
+		}
+
+		.back {
+			background-repeat: no-repeat;background-size: auto 60%;background-position: center top 10%;
+		}
+
+		.back {
+			background-repeat: no-repeat;background-size: auto 80%;background-position: center top 10%;
+		}
+		.Shead {
+			padding-top:25%;
+			shead:#fff;
+		}
+	.jumbotron {
+		background-position:center top 10%;
+		background-size: 50% auto;
+		margin:0;
+	}
+	.lead {
+	position: center top 15%;
+	color: #fff;
 }
 
-.card:hover, .card:focus,.center:hover, .center:focus {
-        color: #2e4dc1;
-    background-color: #fff;
-    box-shadow: 0 16px 32px 0 rgba(0,0,0,0.2); 
-    transition: 0.6s;
-	border-radius: 20px;
-}
-.center {
-padding: 40px 0;  text-align: center;background-color: #FFF; color:#2e4dc1; border-radius: 10px; margin:2px; opacity: 0.6;
-}
-.center:hover, .center:focus {
-        color: #2e4dc1;
-    background-color: #fff;
-    box-shadow: 0 32px 64px 0 rgba(0,0,0,0.2); 
-    transition: 0.8s;
-	border-radius: 30px;
-	z-index: 2000;
-	opacity:0.96;
-}
+	}
 
-/*
 
-html {
-    height: 100%;
-    overflow-y: hidden;
-}
-*/
 
-.navbar-inverse {
-    background-color: #2e4dc1;
-    border-color: #449d44;
-}
-.navbar .navbar-inverse .navbar-nav > li > a:focus, .navbar-inverse .navbar-nav > li > a:hover {
-    color: #2e4dc1;
-    background-color: #fff;
-    transition: 0.6s;
-    box-shadow: 0 8px 16px 0 rgba(0,0,0,0.2);border-radius: 20px;
-	
-    
+	@media only screen and (max-width:1100px) and (min-width:620px){
+		.login {
+			padding-right:10px; padding-left:10px; padding-bottom:60px;padding-top:80px;
+		}
+		.register {
+			padding-left: 10px;padding-right: 10px; padding-top:80px; padding-bottom:80px;
+		}
+		.jumbotron {
+		background-position:center top 15%;
+		background-size: 50% auto;
+		margin:0;
+	}
+
+
+	}
+
+	@media only screen and (min-width:620px){
+			.jumbotron {
+		background-position:center center;
+		background-size: 50% auto;
+		margin:0;
+	}
+
+
 }
 
-.navbar-inverse .navbar-nav > li > a {
-    color: #fff;
-    background-color: #2e4dc1;
-    border-color: #449d44;
-    
-}
 
-.jumbotron > a:focus, .jumbotron > a:hover, .pull-right > button:hover, .pull-right > button:focus, button:focus, button:hover ,  {
-    transition: 0.6s;
-    box-shadow: 0 8px 16px 0 rgba(0,0,0,0.2);border-radius: 20px;
-}
-.but > li:hover,.but > li:focus {
-	border-bottom: 4px dotted #fff;
-}
+	.row{
+		border-radius: 10px;
+	}
 
-.but2 > li:hover,.but2 > li:focus {
-	border-bottom: 4px dotted #2e4dc1;
-}
+	.card {
+		box-shadow: 0 2px 4px 0 rgba(0,0,0,0.2);
+		background-color: #fff;
+		color: #145a32;
+		border-radius: 10px;
+	}
 
-/**********************/
-      .wave-one {
-  width: 1024px;
-  height: 200px;
-  background: url("/static/rsz_1rsz_cloud1_copy.png") /*https://image.ibb.co/jPuBjo/*/
- 	no-repeat;
-  float: left;
-  position: absolute;
-  top: 0;
-  left: 0;
-  z-index: 4;
-  overflow: hidden;
-  opacity: 0.6;
-}
+	.center:hover, .center:focus {
+		color: #145a32;
+		background-color: #fff;
+		box-shadow: 0 16px 32px 0 rgba(0,0,0,0.2); 
+		transition: 0.6s;
+		border-radius: 20px;
+	}
+	.center {
+		padding: 40px 0;  text-align: center;background-color: #FFF; color:#145a32; border-radius: 10px; margin:2px; opacity: 0.8;
+	}
+	.center:hover, .center:focus {
+		color: #145a32;
+		background-color: #fff;
+		box-shadow: 0 32px 64px 0 rgba(0,0,0,0.2); 
+		transition: 0.8s;
+		border-radius: 30px;
+		z-index: 2000;
+		opacity:0.99;
+	}
 
-.wave-two {
-  width: 1024px;
-  height: 380px;
- background: url("/static/rsz_1cloud1_copy.png") no-repeat; /* https://image.ibb.co/mzSaAT/*/
-  float: left;
-  position: absolute;
-  top: 40px;
-  left: 0;
-  z-index: 5;
-  overflow: hidden;opacity: 0.6;
-}
+	.navbar-inverse {
+		background-color: #145a32;
+		border-color: #449d44;
+	}
+	.navbar .navbar-inverse .navbar-nav > li > a:focus, .navbar-inverse .navbar-nav > li > a:hover {
+		color: #145a32;
+		background-color: #fff;
+		transition: 0.6s;
+		box-shadow: 0 8px 16px 0 rgba(0,0,0,0.2);border-radius: 20px;
 
-.wave-three {
-  width:1024px;
-  height:280px;
- background:url("/static/rsz_1cloud1_copy.png") no-repeat;
-  position:relative;
-  z-index:7;
-  top: 0;
-  left:0px;
-  opacity: 0.6;
-  overflow: hidden;
-}
-/*
-https://image.ibb.co/gCzu4o/cloud1.png
-*/
-.wave-threeb {
-  width:1024px;
-  height:380px;
-  position:absolute;
-  top: 0;
-  left: 0;
-  z-index: 2;
-  float: left;
-  overflow: hidden;
-  background: url("/static/rsz_1rsz_cloud1_copy.png") no-repeat;opacity: 0.6;
-}
 
-/*
-==============================================
-floating
-==============================================
-*/
+	}
 
-.floating{
-    animation-name: floating;
-    -webkit-animation-name: floating;
+	.navbar-inverse .navbar-nav > li > a {
+		color: #fff;
+		background-color: #145a32;
+		border-color: #449d44;
 
-    animation-duration: 30s;   
-    -webkit-animation-duration: 30s;
+	}
 
-    animation-iteration-count: infinite;
-    -webkit-animation-iteration-count: infinite;
-}
+	.jumbotron > a:focus, .jumbotron > a:hover, .pull-right > button:hover, .pull-right > button:focus, button:focus, button:hover ,  {
+		transition: 0.6s;
+		box-shadow: 0 8px 16px 0 rgba(0,0,0,0.2);border-radius: 20px;
+	}
+	.but > li:hover,.but > li:focus {
+		border-bottom: 4px dotted #fff;
+	}
 
-@keyframes floating {
-    0% {
-        transform: translateX(-20%);  
-    }
-    10% {
-         transform: translateX(-10%);  
-    }
-  	20% {
-    		transform:translateX(0%)
-    }
-    30% {
-        transform: translateX(20%);
-    }   
+	.but2 > li:hover,.but2 > li:focus {
+		border-bottom: 4px dotted #145a32;
+	}
 
-   40% {
-        transform: translateX(30%);
-    }  
-    50% {
-        transform: translateX(50%);
-    }  
-    60% {
-        transform: translateX(60%);
-    }  
-    70% {
-        transform: translateX(70%);
-    } 
-    80% {
-        transform: translateX(90%);
-    }   
-    90% {
-        transform: translateX(100%);
-    }   
-    100% {
-        transform: translateX(120%);
-    }   
+	/**********************/
 
-         
-}
+		.scroll {
+		    overflow-y:scroll;
+    -webkit-overflow-scrolling: touch;
+	}
 
-@-webkit-keyframes floating {
-    0% {
-        -webkit-transform: translateX(0%);  
-    }
-    50% { 
-         transform: translateX(100%);  
-    }
-  	80% {
-      	transform: translateX(150%);  
-    }
-    100% {
-        -webkit-transform: translateX(0%);
-    }           
-}
 
-/* Second Version*/
-.floating2{
-    animation-name: floating;
-    -webkit-animation-name: floating;
-
-    animation-duration: 12s;   
-    -webkit-animation-duration: 12s;
-
-    animation-iteration-count: infinite;
-    -webkit-animation-iteration-count: infinite;
-}
-
-@keyframes floating2 {
-    0% {
-        transform: translateX(0%);  
-    }
-    20% {
-         transform: translateX(80%);  
-    }
-  	80% {
-    		transform:translateX(40%)
-    }
-    100% {
-        transform: translateX(0%);
-    }           
-}
-
-@-webkit-keyframes floating2 {
-    0% {
-        -webkit-transform: translateX(0%);  
-    }
-    20% { 
-         transform: translateX(80%);  
-    }
-  	80% {
-      	transform: translateX(40%);  
-    }
-    100% {
-        -webkit-transform: translateX(0%);
-    }           
-}
-
-/* Third Version*/
-.floating3{
-    animation-name: floating;
-    -webkit-animation-name: floating;
-
-    animation-duration: 18s;   
-    -webkit-animation-duration: 18s;
-
-    animation-iteration-count: infinite;
-    -webkit-animation-iteration-count: infinite;
-}
-
-@keyframes floating3 {
-    0% {
-        transform: translateX(0%);  
-    }
-    40% {
-         transform: translateX(50%);  
-    }
-  	80% {
-    		transform:translateX(100%)
-    }
-    100% {
-        transform: translateX(0%);
-    }           
-}
-
-@-webkit-keyframes floating3 {
-    0% {
-        -webkit-transform: translateX(0%);  
-    }
-    40% { 
-         transform: translateX(50%);  
-    }
-  	80% {
-      	transform: translateX(100%);  
-    }
-    100% {
-        -webkit-transform: translateX(0%);
-    }           
-}
-
-/* Fourth Version*/
-.floating4{
-    animation-name: floating;
-    -webkit-animation-name: floating;
-
-    animation-duration: 25s;   
-    -webkit-animation-duration: 25s;
-
-    animation-iteration-count: infinite;
-    -webkit-animation-iteration-count: infinite;
-}
-
-@keyframes floating4 {
-    0% {
-        transform: translateX(0%);  
-    }
-    50% {
-    		transform:translateX(100%)
-    }
-    100% {
-        transform: translateX(0%);
-    }           
-}
-
-@-webkit-keyframes floating4 {
-    0% {
-        -webkit-transform: translateX(0%);  
-    }
-    50% { 
-         transform: translateX(50%);  
-    }
-    100% {
-        -webkit-transform: translateX(0%);
-    }           
-}
-
-/************************/
+	/************************/
 
 </style>
 
 
-  </head>
- <!-- <body style="background: linear-gradient(141deg, #0fb8ad 0%, #1fc8db 51%, #2cb5e8 75%);opacity: 0.95; background-size: cover; height:100%;
-   width:100%;" > -->
-
+</head>
 <body style="vertical-align:baseline" translate="no" >
 	
-    {% include 'includes/_navbar.html' %}
+	{% include 'includes/_navbar.html' %}
 
-    <div class="container" style=" "></div>
-      {% include 'includes/_messages.html' %}
+	<div class="container" style=" "></div>
+	{% include 'includes/_messages.html' %}
 
 
 	{% block div %}{% endblock %}
@@ -525,47 +266,47 @@ floating
 
 
 
-      {% block body %}{% endblock %}
+	{% block body %}{% endblock %}
+<!--#2e4dc1 -->
+	{% block script %}{% endblock %} 
 
-<!--hakjhdkahs -->    
 
-
- 
-  <!--  <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script> -->
- <!--   <script src="//cdn.ckeditor.com/4.6.2/basic/ckeditor.js"></script>
-    <script type="text/javascript">
-      CKEDITOR.replace('editor')
-    </script>   -->
-{% block script %}{% endblock %}
-
-<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
+	<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
 	<script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js" integrity="sha384-Tc5IQib027qvyjSMfHjOMaLkfuWVxZxUPnCJA7l2mCWNIpG9mGCD8wGNIcPD7Txa" crossorigin="anonymous"></script>
 
+	<div class="row" style="background-color:#145a32;border-color: #449d44; width: 100%;  height:auto; margin:0; display:block; vertical-align:baseline;position:absolute; padding:19px;">
+		<div class="col-xs-6" style="height:auto; text-align: left;">
 
 
 
+			<ul class="contact"  style="color:#fff;font-size:14px;list-style-type: none;">
+				<li>
+					<a href="http://cse.iitkgp.ac.in/~smisra/swan/contact.html" target="_blank" style="color: #fff; text-decoration:none;"> &nbsp; <h3 style="color: #fff;" >Contact Us</h3></a>
+				</li>                                                             
+				<li style="margin: 0; padding: 0.2em;" ><span class="glyphicon glyphicon-briefcase"></span> <strong>Address: </strong> Smart Wireless Applications & Networking Lab,<br> Department of Computer Science & Engineering,<br> IIT Kharagpur,<br> West Bengal 721302</li>
+				<li style="margin: 0; padding: 0.2em;"><span class="glyphicon glyphicon-earphone"></span> <strong>Phone: </strong> +91-3222-282338</li>
+				<li style="margin: 0; padding: 0.2em;"><span class="glyphicon glyphicon-envelope"></span> <strong>Email: </strong> sudipm@iitkgp.ac.in</li>
+			</ul>
+		</div>
+
+		<div class="col-xs-3 pull-right" style="height:50%; width:auto; padding:20px;">
+<!--<img src="/static/logoALL.png" style="" height="120" width="auto"/>-->
+<img src="http://cse.iitkgp.ac.in/~smisra/swan/SWAN-Logo.png" style="margin-top:70px;" width="120" height="120">
+
+		</div>
+
+		<div class="col-xs-3 pull-right" style="margin-top:140px;">
 
 
+<a href="https://www.facebook.com/SWANGroup.IITKGP/" target="_blank" ><img src="/static/fb.png" id="social" style="padding:15px; margin-bottom:0;" height="70" width="auto"/> </a>
+<img src="/static/twitter.png" id="social" style="padding:15px;" height="70" width="auto"/>
+<img src="/static/insta.png" id="social" style="padding:15px;" height="70" width="auto"/>
 
-<div class="" style="background-color:#2e4dc1;border-color: #449d44; width: 100%; padding:19px; height:auto; margin:0; display:block;  vertical-align:baseline;position:absolute;">
-<div class="col-xs-6" style="height:auto; text-align: left;">
-
-
-                                                                
-<ul class="contact"  style="color:#b3b6b7;font-size:12px;list-style-type: none;">
- <li>
-<a href="http://cse.iitkgp.ac.in/~smisra/swan/contact.html" target="_blank" style="color: #fff; text-decoration:none;"> &nbsp; <h3 style="color: #fff;" >Contact Us</h3></a>
-</li>                                                             
- <li style="margin: 0; padding: 0.2em;" ><span class="glyphicon glyphicon-briefcase"></span> <strong>Address: </strong> Smart Wireless Applications & Networking Lab,<br> Department of Computer Science & Engineering,<br> IIT Kharagpur,<br> West Bengal 721302</li>
-                                                                        <li style="margin: 0; padding: 0.2em;"><span class="glyphicon glyphicon-earphone"></span> <strong>Phone: </strong> +91-3222-282338</li>
-                                                                        <li style="margin: 0; padding: 0.2em;"><span class="glyphicon glyphicon-envelope"></span> <strong>Email: </strong> sudipm@iitkgp.ac.in</li>
-                                                                </ul>
 </div>
 
-<div class="col-xs-6" style="height:auto; text-align: right; padding:20px">
-<img src="http://cse.iitkgp.ac.in/~smisra/swan/SWAN-Logo.png" width="120" height="120">
-</div>
-</div>
+
+<div class="col-lg-12" style="color:#f0f3f4; font-size:12px;text-align:right;" ><hr style="border-color:#f0f3f4;" >&copy; Copyright 2018<a href="http://cse.iitkgp.ac.in/~smisra/swan/index.html" style="text-decoration:none; font-size: 16px; color: #FFF;" > SWAN Lab,</a> <a href="http://www.iitkgp.ac.in/" style="text-decoration:none; font-size: 16px; color: #FFF;" >IIT Kharagpur - </a>All Rights Reserved.</div>
+	</div>
 
 </body>
 

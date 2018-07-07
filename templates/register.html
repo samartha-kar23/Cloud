@@ -1,5 +1,8 @@
 {% extends 'layout.html' %}
 
+
+
+
 {% block body %}
 <div class="register" style="">
   <h1>Register</h1>
@@ -9,7 +12,7 @@
     <div class="form-group">
       {{render_field(form.Firstname, class_="form-control")}}
     </div>
- <div class="form-group">
+    <div class="form-group">
       {{render_field(form.Lastname, class_="form-control")}}
     </div>
     <div class="form-group">
@@ -21,15 +24,54 @@
     <div class="form-group">
       {{render_field(form.confirm, class_="form-control")}}
     </div>
- <div class="form-group">
+    <div class="form-group">
       {{render_field(form.Address, class_="form-control")}}
     </div>
- <div class="form-group">
+    <div class="form-group">
       {{render_field(form.Phone, class_="form-control")}}
     </div>
+
+
+<div class = "container scroll" style="background:#fff;width:100%; height:200px;;padding:10px;margin-bottom:20px;">
+	
+
+   <div class="form-group">
+      
+  <label for="Service_Modes">Service Modes</label><br>
+ <input id="Service_Modes-0" name="Service_Modes" type="checkbox" value="Manual"> <label for="Service_Modes-0">Manual</label><br><input id="Service_Modes-1" name="Service_Modes" type="checkbox" value="Automatic"> <label for="Service_Modes-1">Automatic</label>
+
+    </div>    
+<hr>
+
+    <div class="form-group"  >
+      
+  <label for="Data_Services">Data Services</label><br>
+  <input id="Data_Services-0" name="Data_Services" type="checkbox" value="Images"  > <label for="Data_Services-0">Images</label> <br>
+<input id="Data_Services-1" name="Data_Services" type="checkbox" value="Temparature"> <label for="Data_Services-1">Temparature</label> <br>
+<input id="Data_Services-2" name="Data_Services" type="checkbox" value="Humidity"  > <label for="Data_Services-2">Humidity</label> <br>
+<input id="Data_Services-3" name="Data_Services" type="checkbox" value="Moisture"> 
+<label for="Data_Services-3">Moisture</label> <br>
+<input id="Data_Services-4" name="Data_Services" type="checkbox" value="Water Level"> <label for="Data_Services-4">Water Level</label> <br>
+<input id="Data_Services-5" name="Data_Services" type="checkbox" value="History"> 
+<label for="Data_Services-5">History</label>
+  
+
+    </div>
+
+
+
+
+
+</div>
+	
+
+
+
+  
+
     <p>
-<button type="submit" class="btn btn-success">Submit</button>
-</p>
+      <button type="submit" class="btn btn-success">Submit</button>
+    </p>
   </form>
 </div>
 {% endblock %}
