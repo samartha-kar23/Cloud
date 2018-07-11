@@ -5,7 +5,7 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <meta charset="UTF-8">
   
-  <title>Swan - Sensor Cloud</title>
+  <title>Agro-Sensor-Cloud</title>
   
   
   
@@ -72,7 +72,7 @@
     #sidebar {
       min-width: 250px;
       max-width: 250px;
-      background: #116158;
+      background: #34495e;
       color: #fff;
       transition: all 0.6s cubic-bezier(0.945, 0.020, 0.270, 0.665);
       transform-origin: bottom left;
@@ -85,7 +85,7 @@
 
     #sidebar .sidebar-header {
       padding: 20px;
-      background: #116158;
+      background: #34495e;
     }
 
     #sidebar ul.components {
@@ -104,13 +104,13 @@
       display: block;
     }
     #sidebar ul li a:hover {
-      color: #116158;
+      color: #34495e;
       background: #fff;
     }
 
     #sidebar ul li.active > a, a[aria-expanded="true"] {
       color: #fff;
-      background: #116158;
+      background: #34495e;
     }
 
 
@@ -134,7 +134,7 @@
     ul ul a {
       font-size: 0.9em !important;
       padding-left: 30px !important;
-      background: #116158;
+      background: #34495e;
     }
 
     ul.CTAs {
@@ -151,16 +151,16 @@
 
     a.download {
       background: #fff;
-      color: #116158;
+      color: #34495e;
     }
 
     a.article {
-      background: #116158 ;
+      background: #34495e ;
       color: #fff ;
     }
     a.article:hover {
       background: #fff;
-      color: #116158 ;
+      color: #34495e ;
       transition: 0.6s;
     }
 
@@ -285,9 +285,10 @@
         <li>
           <a href="#pageSubmenu" data-toggle="collapse" aria-expanded="false">View</a>
           <ul class="collapse list-unstyled" id="pageSubmenu">
-            <li><a href="#" id="regions" >Regions</a></li>
-            <li><a href="#" id= "sensors">Type</a></li>
-            <li><a href="#" id= "senno">Sensors</a></li>
+	
+            <li><a href="#" id="regions" >Region Data</a></li>
+            <li><a href="#" id= "sensors">Sensor Type</a></li>
+            <li><a href="#" id= "senno">Sensors Active</a></li>
           </ul>
   <!--        <a href="#pageSubmenu" data-toggle="collapse" aria-expanded="false">Update</a>
           <ul class="collapse list-unstyled" id="pageSubmenu">
@@ -321,7 +322,7 @@
 {% if info[0] == 3 or info[0]== 2 %}	            
 <ul class="list-unstyled CTAs">
 
-        <li><a href="" target="" class="article"  style="background: #54bce9; ">Automatic Mode</a></li>
+        <li><a href="" target="" class="article" id="AutoPump" style="background: #54bce9; ">Automatic Mode</a></li>
       </ul>
 
 {% endif %}
@@ -350,7 +351,7 @@
        
 	 <li><a href="#" style="" >Pump status</a></li> 
 	
-        <li><a href="#">Sensor status</a></li> 
+        <li><a href="#">Our Sensors' status</a></li> 
      
      {% if status > 0 %}
      
@@ -367,7 +368,46 @@
 </div>
 </nav>
 
-<br>  
+<br> 
+<div id="auto" class="nav navbar-nav" style="width:100%; height:auto; color: #e82374" >
+<h3  style="color: #23c4c1; " >Automatic Mode</h3>
+</div>
+<div id="on" class="nav navbar-nav" style="width:100%; height:auto; color: #e82374" >
+<h3  style="color:#20ab1c; " >Pump: Off</h3>
+</div>
+<div id="off" class="nav navbar-nav" style="width:100%; height:auto; color: #e82374" >
+<h3  style="color: #de2658; " >Pump: On</h3>
+</div>
+
+{% if value1[5] ==0 %}
+{% elif value1[5] == 1 %}
+<div class="nav navbar-nav" style="width:100%; height:auto; color: #e82374" >
+<h3>Alert</h3>
+<p><strong>It is raining now!</strong></p>
+</div>
+{% endif %}
+
+{% if senSub == 0 %}
+<div class="nav navbar-nav" style="width:100%; height:auto; color: #e82374" >
+<h3>Alert</h3>
+<p>You have not registered for any services.</p>
+</div>
+{% else %}
+{% if info[0] == 0%}
+<div class="nav navbar-nav" style="width:100%; height:auto; color: #e82374" >
+<h3>Alert</h3>
+<p>You have not registered for any pump actuation service. </p>
+</div>
+{% endif %}
+{% endif %}
+
+<div class="nav navbar-nav" style="width:100%; height:auto;" >
+<h3>Instructions</h3>
+<p>Kindly use the side panel for monitoring sensor activity and updating various data stores.</p>
+</div>
+
+<br>
+<br>
 {% for r in range(region) %}
 {% if r < 1 %}
 <div id="{{ r+1 }}" class="nav navbar-nav card" style="margin: 5px; padding: 20px; text-align:center;">
@@ -375,15 +415,15 @@
   <h2>Region {{ r+1 }}</h2>
 
 
-	 <ul style="" >  
+	 <ul style=""> 
 	{% for i in range(data|length) %}
 		{% for j in data[i] %}
 		{% if data[i].index(j) == 0 %}
 		{% if i< 4 and r == 0 %}
 		{% if i == 0 and info[2]==1 %}		
 		<div>
-		<li style="margin-top:120px;">  {{ j }}
-			<div class="c100 p{{ value1[i] }} green">
+		<li style="margin-top:120px; list-style-type: none;">  {{ j }}
+			<div class="c100 p{{ value1[i] }} orange dark">
     <span>{{ data[i][3] }}</span>
     <div class="slice">
       <div class="bar"></div>
@@ -394,9 +434,9 @@
 		
 		{% elif i == 1 and info[3]==1 %}		
 		<div>
-		<li style="margin-top:120px;">  {{ j }}
-			<div class="c100 p{{ value1[i] }} green">
-    <span>{{ data[i][3] }}</span>
+		<li style="margin-top:120px; list-style-type: none;">  {{ j }}
+			<div class="c100 p{{ value1[i] }} blue dark">
+    <span>{{ data[i][3] }}%</span>
     <div class="slice">
       <div class="bar"></div>
       <div class="fill"></div>
@@ -406,9 +446,11 @@
 
 		{% elif i == 2 and info[4]==1 %}		
 		<div>
-		<li style="margin-top:120px;">  {{ j }}
-			<div class="c100 p{{ value1[i] }} green">
-    <span>{{ data[i][3] }}</span>
+		<li style="margin-top:120px;list-style-type: none;">  {{ j }}
+			<div class="c100 p{{ value1[i] }} green dark">
+
+    <span>{{ data[i][3] }}%</span>
+
     <div class="slice">
       <div class="bar"></div>
       <div class="fill"></div>
@@ -418,8 +460,8 @@
 		
 	       {% elif i == 3 and info[5]==1 %}		
 		<div>
-		<li style="margin-top:120px;">  {{ j }}
-			<div class="c100 p{{ value1[i] }} green">
+		<li style="margin-top:120px;list-style-type: none;">  {{ j }}
+			<div class="c100 p{{ value1[i] }} yellow dark">
     <span>{{ data[i][3] }}</span>
     <div class="slice">
       <div class="bar"></div>
@@ -432,8 +474,8 @@
 
 		{% elif i>5 and r == 1 %}
 			<div>
-		<li style="margin-top:120px;">  {{ j }}
-			<div class="c100 p{{ value1[i] }} green">
+		<li style="margin-top:120px;list-style-type: none;">  {{ j }}
+			<div class="c100 p{{ value1[i] }} green dark">
     <span>{{ data[i][3] }}</span>
     <div class="slice">
       <div class="bar"></div>
@@ -455,11 +497,18 @@
 
 
 <div id="Sensors" class="nav navbar-nav card" style="margin: 5px; padding: 20px; text-align:center;">
-  <h2>Sensor Types</h2>
+  <h2>Sensor Type</h2>
   <ul>
    {% for type in types %}
    {% for t in type %}
-   <li><h4>{{ t }}</h4></li>
+	{% if t=="Temparature" and info[2]==1 %}
+   <li  ><h4>{{ t }}</h4></li>
+	{% elif t=="Humidity" and info[3]==1 %}
+	<li ><h4>{{ t }}</h4></li>
+	{% elif t=="Moisture" and info[4]==1 %}
+	<li  ><h4>{{ t }}</h4></li>
+	{% else %}
+	{% endif %}
    {% endfor %}
    {% endfor %}
  </ul>		
@@ -470,9 +519,9 @@
 
 <div id="Senno" class="nav navbar-nav card" style="margin: 5px; padding: 20px; text-align:center;">
 
-  <h2>Sensors </h2><br> 
-  <div class="c100 p{{ 24 }} orange">
-    <span>{{ 4 }}</span>
+  <h2>Sensors Active </h2><br> 
+  <div class="c100 p{{ 24 }} orange dark">
+    <span>{{ senSub }}</span>
     <div class="slice">
       <div class="bar"></div>
       <div class="fill"></div>
@@ -481,10 +530,7 @@
   
 </div>
 <br>
-<div class="nav navbar-nav">
-<h3>Instructions</h3>
-<p>Kindly use the side panel for monitoring sensor activity and updating various data stores.</p>
-</div>
+
 </div>
 </div>
 
@@ -505,11 +551,42 @@
 	
 	$("#OnPump").on("click", function() {
       	$("#pump").css("color","#4fb117");
-	alert("pump on");
+	alert("pump is turned on!");
+	/////// AJAX CALL ////////////////
+	$.post( "/pump", {
+	data : "1",
+	
+	})
+	.done(function(data){
+	console.log(data);
+	alert(data);
+	
+	});	
+       ///////// AJAX END ////////////////	
     });
+
+
+
 	$("#OffPump").on("click", function() {
       $("#pump").css("color","#d62626");
-	alert("pump off");
+	alert("pump is turned off!");
+	/////// AJAX CALL ////////////////
+	$.post( "/pump", {
+	data : "0",
+	
+	})
+	.done(function(data){
+	console.log(data);
+	alert(data);
+	
+	});	
+       ///////// AJAX END ////////////////
+
+
+ });	
+	$("#AutoPump").on("click", function() {
+	$("#auto").slideToggle(1500);
+	alert("Automatic mode selected!");
  });
 	
       $(document).ready(function() {
@@ -520,14 +597,30 @@
 
         $("#1").slideToggle(0);
 	$("#2").slideToggle(0);
-
+	$("#on").slideToggle(0);
+	$("#off").slideToggle(0);
+	$("#auto").slideToggle(0);
         $("#Sensors").slideToggle(0);
         $("#Users").slideToggle(0);
         $("#Senno").slideToggle(0);
       });
 
+/*
+      $("#OnPump").click(function(){
 
+	$("#on").slideToggle(1500);
+      });
+      $("#OffPump").click(function(){
 
+	$("#off").slideToggle(1500);
+      });
+      $("#AutoPump").click(function(){
+$("#auto").slideToggle(1500);
+	
+	alert("auto");
+	
+      });
+*/
       $("#regions").click(function(){
         $("#1").slideToggle(1500);
 	$("#2").slideToggle(1500);
@@ -548,7 +641,7 @@
         $("#Senno").slideToggle(1500);
       });
     </script>
-<div class="row" style="background-color:#116158;border-color: #449d44; width: 100%;  height:auto; margin:0; display:block; vertical-align:baseline;position:absolute; padding:19px;">
+<div class="row" style="background-color:#145a32;border-color: #449d44; width: 100%;  height:auto; margin:0; display:block; vertical-align:baseline;position:absolute; padding-bottom:19px;">
 		<div class="col-xs-6" style="height:auto; text-align: left;">
 
 

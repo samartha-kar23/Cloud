@@ -126,7 +126,7 @@ def register():
 ###################	
 	#test.myfunction()
 #	time.sleep(2)
-        flash('You are now registered and can log in', 'success')
+       # flash('You are now registered and can log in', 'success')
 	#subprocess.call('python /home/devstack/Desktop/login/instance.py',shell=True)
 	#k= str(subprocess.check_output(["bash","/home/devstack/Desktop/login/create.sh"]))	
 	
@@ -134,10 +134,10 @@ def register():
 	#time.sleep(3)
 	
 	
-	flash('Cloud instance initiated','success')
+	#flash('Cloud instance initiated','success')
 	#flash(k)
 	#flash(ip)
-        return redirect(url_for('login'))
+        return redirect(url_for('index'))
     return render_template('register.html', form=form)
 
 
@@ -326,7 +326,7 @@ def console():
 @app.route('/irrigation',methods=['GET', 'POST'])
 @is_logged_in
 def irrigation():
-	value1 = [0]*10  #stores region 2 value
+	value1 = [0]*14  #stores region 2 value
 	value2 = [0]*5  #stores region 1 value
 	conn = pymysql.connect(host='10.14.88.224', user='root', password='sensor_cloud', db='SENSORS')
 	conn1 = pymysql.connect(host='10.14.88.224', user='root', password='sensor_cloud', db='Registration')	
@@ -344,6 +344,7 @@ def irrigation():
 			rest3 = cur2.execute(sql3)
 			conn.commit()
 			count=0
+			senSub=0
 			Status = cur2.fetchall()
 			for status in Status:
 				for s in status:
@@ -369,9 +370,13 @@ def irrigation():
 			sql5 = "SELECT mode, Image, Temp, Humid, Mois, Waterl, Hist FROM Users WHERE Firstname=%s"
 			rest5 = cur3.execute(sql5,(session['Firstname']))
 			info = cur3.fetchall()			
+			for i in range(2,len(info[0])):
+				if info[0][i] == 1: 				
+					senSub+=1
+							
 						
 			print info	
-			return render_template('irrigation.html',region=Regions[0][0], types=Types, status=count, data=data, value1=value1, info=info[0])	
+			return render_template('irrigation.html',region=Regions[0][0], types=Types, status=count, data=data, value1=value1, info =info[0], senSub=senSub)	
 	finally: 
 		conn.close()
 		conn1.close()
@@ -379,6 +384,58 @@ def irrigation():
 
 
 ##############IRRIGATION CLOSE #######################################################
+
+################ PUMP ################################################################
+
+@app.route('/pump', methods=['GET', 'POST'])
+@is_logged_in
+def pump():
+	#connection creation to database SENSORS
+	conn = pymysql.connect(host='10.14.88.224', user='root', password='sensor_cloud', db='SENSORS')
+	data = None
+	value = None
+	if request.method == 'POST':
+
+		data = request.form['data']
+		print("**************")
+		print(data)
+		print("***************")
+		
+		
+		try:
+			with conn.cursor() as cur2:
+				if data == "1":				
+					sql = "UPDATE SENSOR SET Data=%s WHERE type=%s"
+					result = cur2.execute(sql,('1','Pump'))
+					conn.commit()				
+				else:
+					sql = "UPDATE SENSOR SET Data=%s WHERE type=%s"	
+					result = cur2.execute(sql,('0','Pump'))
+					conn.commit()				
+
+
+				sql = "SELECT Data FROM SENSOR WHERE Type=%s and Region=%s"
+				result = cur2.execute(sql,('Pump','R1'))
+				print("**************")				
+				return str(result)
+			if(result > 0):
+#				conn.close()
+				return "success"
+#			return "success"		
+			else:
+				return "error"			
+			
+		finally:
+#			
+			conn.close()	
+#			flash('Your session is active','success')	
+#			conn.close()			
+#			print str(value)
+#			return str(value)
+
+#################### END PUMP ########################################################
+
+
 
 ############### HEALTH ############################################################
 
@@ -388,7 +445,7 @@ def health():
 	value1 = [0]*10  #stores region 2 value
 	value2 = [0]*5  #stores region 1 value
 	conn = pymysql.connect(host='10.14.88.224', user='root', password='sensor_cloud', db='SENSORS')
-	conn1 = pymysql.connect(host='10.14.88.224', user='root', password='sensor_cloud', db='Registration')	
+	conn1 = pymysql.connect(host='10.14.88.224', user='root', password='sensor_cloud', db='Registration')
 	try: 		
 		with conn.cursor() as cur2, conn1.cursor() as cur3:
 			sql = "SELECT COUNT(DISTINCT Region) FROM SENSOR"
