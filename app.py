@@ -326,12 +326,19 @@ def console():
 @app.route('/irrigation',methods=['GET', 'POST'])
 @is_logged_in
 def irrigation():
-	value1 = [0]*14  #stores region 2 value
-	value2 = [0]*5  #stores region 1 value
+	#value1 = []  #stores region 2 value
+	#value2 = [0]*5  #stores region 1 value
 	conn = pymysql.connect(host='10.14.88.224', user='root', password='sensor_cloud', db='SENSORS')
 	conn1 = pymysql.connect(host='10.14.88.224', user='root', password='sensor_cloud', db='Registration')	
 	try: 		
 		with conn.cursor() as cur2, conn1.cursor() as cur3:
+			sql = "SELECT COUNT(DISTINCT Type) FROM SENSOR"
+			rest = cur2.execute(sql)
+			conn.commit()
+			cntType = cur2.fetchone()
+			value1 = [0]*2*int(cntType[0])
+
+
 			sql = "SELECT COUNT(DISTINCT Region) FROM SENSOR"
 			rest1 = cur2.execute(sql)
 			conn.commit()
@@ -408,10 +415,43 @@ def pump():
 					sql = "UPDATE SENSOR SET Data=%s WHERE type=%s"
 					result = cur2.execute(sql,('1','Pump'))
 					conn.commit()				
-				else:
+				elif data == "0":
 					sql = "UPDATE SENSOR SET Data=%s WHERE type=%s"	
 					result = cur2.execute(sql,('0','Pump'))
-					conn.commit()				
+					conn.commit()
+				else:
+					while True:
+						sql = "SELECT Data FROM SENSOR WHERE Type in ('Moisture','Waterl') and Region=%s ORDER BY Type"				
+						result = cur2.execute(sql,('R1'))
+						conn.commit()
+						d = [0]*len(result)
+						for i in range(len(result)):
+							for j in result[i]:
+								d[i]=j
+						sql = "SELECT Data FROM SENSOR WHERE Type=%s and Region=%s ORDER BY Type"				
+						result = cur2.execute(sql,('Pump','R1'))
+						conn.commit()
+						p = [0]*len(result)
+						for i in range(len(result)):
+							for j in result[i]:
+								p[i]= j					
+						#calculate using moisture and waterlevel data:
+						if int(d[0]) < 60:
+							if int(d[1]) < 580:
+								flag = '1'
+	
+						else:
+							flag = '0' 
+	
+							sql = "UPDATE SENSOR SET Data=%s WHERE type=%s"	
+							cur2.execute(sql,(flag,'Pump'))
+							conn.commit()
+							break				
+						# auto pumpclose				
+						sql = "UPDATE SENSOR SET Data=%s WHERE type=%s"	
+						cur2.execute(sql,(flag,'Pump'))
+						conn.commit()
+
 
 
 				sql = "SELECT Data FROM SENSOR WHERE Type=%s and Region=%s"
@@ -448,6 +488,13 @@ def health():
 	conn1 = pymysql.connect(host='10.14.88.224', user='root', password='sensor_cloud', db='Registration')
 	try: 		
 		with conn.cursor() as cur2, conn1.cursor() as cur3:
+			sql = "SELECT COUNT(DISTINCT Type) FROM SENSOR"
+			rest = cur2.execute(sql)
+			conn.commit()
+			cntType = cur2.fetchone()
+			value1 = [0]*2*int(cntType[0])
+
+
 			sql = "SELECT COUNT(DISTINCT Region) FROM SENSOR"
 			rest1 = cur2.execute(sql)
 			conn.commit()
@@ -503,6 +550,13 @@ def security():
 	conn1 = pymysql.connect(host='10.14.88.224', user='root', password='sensor_cloud', db='Registration')	
 	try: 		
 		with conn.cursor() as cur2, conn1.cursor() as cur3:
+			sql = "SELECT COUNT(DISTINCT Type) FROM SENSOR"
+			rest = cur2.execute(sql)
+			conn.commit()
+			cntType = cur2.fetchone()
+			value1 = [0]*2*int(cntType[0])
+
+
 			sql = "SELECT COUNT(DISTINCT Region) FROM SENSOR"
 			rest1 = cur2.execute(sql)
 			conn.commit()

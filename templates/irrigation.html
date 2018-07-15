@@ -551,7 +551,7 @@
 	
 	$("#OnPump").on("click", function() {
       	$("#pump").css("color","#4fb117");
-	alert("pump is turned on!");
+	alert("Caution! Turning pump on..");
 	/////// AJAX CALL ////////////////
 	$.post( "/pump", {
 	data : "1",
@@ -587,6 +587,19 @@
 	$("#AutoPump").on("click", function() {
 	$("#auto").slideToggle(1500);
 	alert("Automatic mode selected!");
+	/////// AJAX CALL ////////////////
+	$.post( "/pump", {
+	data : "p",
+	
+	})
+	.done(function(data){
+	console.log(data);
+	alert(data);
+	
+	});	
+       ///////// AJAX END ////////////////
+
+
  });
 	
       $(document).ready(function() {
